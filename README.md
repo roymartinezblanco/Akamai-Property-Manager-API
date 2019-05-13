@@ -1,87 +1,68 @@
 # Akamai Property Manager API
 
-One Paragraph of project description goes here
+This example was designed to update configurations that are active in the production and to update the variables provided and it will promote the changes to production, staging or both. It's meant to be a starting point to show how to edit [Akamai Delivery](https://www.akamai.com/) Configurations  using [Akamai-OPEN API's](https://developer.akamai.com/api) when [Akamai CLI](https://github.com/akamai/cli) is not an option.
 
-## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+### Functions in script
+* Search configuration
+* Fetch Configuration details
+* Fetch Configuration Rules
+* Update Configuration Rules
+* Modify Variables
+* Create Configuration Version
+* Activate Configuration
+* Monitor Activation of Configuration.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
+### Arguments:
 ```
-Give examples
+-h, --help      Show allowed Arguments and values.
+-properties     List of configurations to update. *
+-network        Akamai Network to Activate the configuration. 
+                Allowed Values: STAGING,PRODUCTION,BOTH,NONE *
+-baseline       Configuration version to be used as the baseline.                      Production will be the only one allowed unless                         updated. 
+                Allowed Values: Production, STAGING. *
+-emails         List of emails to be once activated. *
+-note           Note to be used when activating the configuration. *
+-variables      List of property variables to updated. *
+-values         List of variable values to updated. *
+```
+Note: * **Required argument.**
+
+
+### Sample Run
+Based on the Arguments above here is an example of how to execute this script.
+
+```Shell
+python akamaiapi.py -properties devops.somecompany.net -emails someone@somecompany.com -note "Sample Automation Script Run" -network STAGING -baseline PRODUCTION -variables PMUSER_EPS_ENABLED PMUSER_PSE_ENABLED -values FALSE FALSE
+```
+### Example Output
+![Sample Run](https://raw.githubusercontent.com/roymartinezblanco/Akamai-Property-Manager-API/master/assets/scriptSampleRun.jpg)
+
+
+## Prerequisites/Requirements
+
+This are the liberies that you'll need to make sure it runs smoothly.
+
+* requests
+* json
+* urllib
+* datetime
+* multiprocessing
+* argparse
+* time
+* edgegrid
+
+To run this script you will need python3 , pip3 and setuptools. Once pip3 and python3 are installed all additional dependencies are installed using the requierement.txt in the attachment provided.
+```shell
+pip3 install -r requirements.txt
+```
+If you don’t have python3 nor pip3 here are sample commands for Debian/Linux to get you to the wanted state.
+```shell
+apt-get install python3 python3-pip -y
+python3 -m pip install setuptools
+pip3 install -r requirements.txt
 ```
 
-### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+## Disclaimer
+**Keep in mind that is meant to be a sample script to build on top of, it is functional but it by no means cover every single scenario.**

@@ -103,7 +103,7 @@ def UpdateVariable(p: Property, vars: [], vals: []):
             p.error = True
             return
         else:
-            p.rules['rules']['variables'][i]['value'] = vals[i]
+            p.rules['rules']['variables'][varindex]['value'] = vals[i]
         i = i + 1
 
     return p.rules
@@ -277,7 +277,7 @@ if __name__ == '__main__':
                         required=True)
     parser.add_argument('-network', type=str, choices=['STAGING', 'PRODUCTION', 'BOTH', 'NONE'],
                         help='<Required> Akamai Network to Activate the configuration.', required=True)
-    parser.add_argument('-baseline', type=str, choices=['PRODUCTION'],
+    parser.add_argument('-baseline', type=str, choices=['PRODUCTION', 'STAGING'],
                         help='<Required> Configuration version to be used as the baseline. Production will be the only one allowed unless updated',
                         required=True)
     parser.add_argument('-emails', nargs='+', type=str, help='<Required> List of emails to be notified once activated.',
